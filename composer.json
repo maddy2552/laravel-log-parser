@@ -1,0 +1,25 @@
+{
+    "name": "maddy2552/laravel-log-parser",
+    "description": "Laravel Log Parser provides an interface to parse and group laravel logs for sending them to email.",
+    "keywords": ["laravel", "log", "parse", "email"],
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/maddy2552/laravel-log-parser/issues",
+        "source": "https://github.com/maddy2552/laravel-log-parser"
+    },
+    "authors": [
+        {
+            "name": "Kirill Kushnaryov",
+            "email": "kushnarev.k25@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laravel\\Cashier\\": "src/"
+        }
+    }
+}
