@@ -14,12 +14,21 @@
         }
     ],
     "require": {
-        "php": "^7.2",
-        "ext-json": "*"
+        "php": "^7.4",
+        "ext-json": "*",
+        "illuminate/support": "^8.0",
+        "illuminate/console": "^8.0"
     },
     "autoload": {
         "psr-4": {
-            "Laravel\\Cashier\\": "src/"
+            "Maddy2552\\LaravelLogParser\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Maddy2552\\LaravelLogParser\\LaravelLogParserServiceProvider"
+            ]
         }
     }
 }
