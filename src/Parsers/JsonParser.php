@@ -6,5 +6,5 @@ use Maddy2552\LaravelLogParser\Interfaces\Parser;
 
 class JsonParser implements Parser
 {
-
+    // TODO: Json parser class
 }
