@@ -2,7 +2,11 @@
 
 namespace Maddy2552\LaravelLogParser;
 
+use Monolog\Formatter\JsonFormatter;
 use Illuminate\Support\ServiceProvider;
+use Monolog\Handler\RotatingFileHandler;
+use Maddy2552\LaravelLogParser\Interfaces\Parser;
+use Maddy2552\LaravelLogParser\Parsers\JsonParser;
 use Maddy2552\LaravelLogParser\Console\Commands\ParseLogs;
 
 class LaravelLogParserServiceProvider extends ServiceProvider
@@ -29,6 +33,11 @@ class LaravelLogParserServiceProvider extends ServiceProvider
             __DIR__ . '/../config/log-parser.php',
             'log-parser'
         );
+
+        $this->app->bind(LogParser::class, function ($app) {
+            $provider = $this->detectProvider();
+            return new LogParser($provider);
+        });
     }
 
     /**
@@ -56,6 +65,21 @@ class LaravelLogParserServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__ . '/../config/log-parser.php' => $this->app->configPath('log-parser.php'),
             ]);
+        }
+    }
+
+    protected function detectProvider(): Parser
+    {
+        if ($this->app->has('log')) {
+            $logHandlers = $this->app->get('log')->getHandlers();
+
+            foreach ($logHandlers as $handler) {
+                if ($handler instanceof RotatingFileHandler ||
+                    $handler->formatter instanceof JsonFormatter
+                ) {
+                    return new JsonParser();
+                }
+            }
         }
     }
 }

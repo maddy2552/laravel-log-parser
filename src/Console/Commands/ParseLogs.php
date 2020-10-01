@@ -3,6 +3,7 @@
 namespace Maddy2552\LaravelLogParser\Console\Commands;
 
 use Illuminate\Console\Command;
+use Maddy2552\LaravelLogParser\LogParser;
 
 class ParseLogs extends Command
 {
@@ -33,9 +34,10 @@ class ParseLogs extends Command
     /**
      * Execute the console command.
      *
+     * @param  \Maddy2552\LaravelLogParser\LogParser  $parser
      * @return void
      */
-    public function handle(): void
+    public function handle(LogParser $parser): void
     {
         // TODO: Parse logs
     }

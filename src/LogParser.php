@@ -9,9 +9,9 @@ class LogParser
     /**
      * Provider to parse logs.
      *
-     * @var object $parser
+     * @var Parser $parser
      */
-    protected object $parser;
+    protected Parser $parser;
 
     /**
      * Parser constructor.
