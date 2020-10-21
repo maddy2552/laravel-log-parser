@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use Monolog\Handler\RotatingFileHandler;
 use Maddy2552\LaravelLogParser\Interfaces\Parser;
 use Maddy2552\LaravelLogParser\Parsers\JsonParser;
+use Maddy2552\LaravelLogParser\Factories\ParserFactory;
 use Maddy2552\LaravelLogParser\Console\Commands\ParseLogs;
 
 class LaravelLogParserServiceProvider extends ServiceProvider
@@ -70,16 +71,6 @@ class LaravelLogParserServiceProvider extends ServiceProvider
 
     protected function detectProvider(): Parser
     {
-        if ($this->app->has('log')) {
-            $logHandlers = $this->app->get('log')->getHandlers();
-
-            foreach ($logHandlers as $handler) {
-                if ($handler instanceof RotatingFileHandler ||
-                    $handler->formatter instanceof JsonFormatter
-                ) {
-                    return new JsonParser();
-                }
-            }
-        }
+        return ParserFactory::detectLogProvider($this->app);
     }
 }

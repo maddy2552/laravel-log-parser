@@ -22,4 +22,9 @@ class LogParser
     {
         $this->parser = $parser;
     }
+
+    public function parse()
+    {
+        $this->parser->parseToArray();
+    }
 }
